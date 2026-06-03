@@ -255,24 +255,37 @@ def go_to(page):
 def card_css():
     st.markdown("""
     <style>
+
     .stApp {
         background-color: #f5f8fb;
-        color: #111827;
+    }
+
+    /* Algemene tekst donker maken */
+    .stApp,
+    .stApp p,
+    .stApp span,
+    .stApp label,
+    .stApp li,
+    .stMarkdown,
+    .stMarkdown p,
+    .stMarkdown span {
+        color: #1f2937 !important;
     }
 
     .main-title {
         font-size: 52px;
         font-weight: 900;
-        color: #0051A8;
+        color: #0051A8 !important;
         margin-bottom: 0px;
     }
 
     .sub-title {
         font-size: 20px;
-        color: #374151;
+        color: #4b5563 !important;
         margin-bottom: 30px;
     }
 
+    /* AH knoppen */
     div.stButton > button {
         border-radius: 999px;
         background-color: #0051A8;
@@ -282,69 +295,74 @@ def card_css():
         min-height: 56px;
     }
 
-    div.stButton > button p {
+    div.stButton > button * {
         color: white !important;
     }
 
     div.stButton > button:hover {
         background-color: #003F82;
-        color: white !important;
     }
 
-    div.stButton > button:hover p {
-        color: white !important;
-    }
-
-    .recipe-card, .product-card {
-        color: #111827;
-        background: white;
-        border: 1px solid #DDE7F2;
-        box-shadow: 0 4px 18px rgba(0,0,0,.06);
-    }
-
+    /* Recept kaarten */
     .recipe-card {
         padding: 24px;
         border-radius: 20px;
+        background: white;
+        border: 1px solid #DDE7F2;
+        box-shadow: 0 4px 18px rgba(0,0,0,.06);
         margin-bottom: 18px;
+        color: #1f2937 !important;
     }
 
+    /* Product kaarten */
     .product-card {
         padding: 18px;
         border-radius: 16px;
+        background: white;
+        border: 1px solid #DDE7F2;
+        box-shadow: 0 2px 10px rgba(0,0,0,.05);
         margin-bottom: 12px;
+        color: #1f2937 !important;
     }
 
-    .recipe-card * {
-        color: #111827 !important;
-    }
-
+    .recipe-card *,
     .product-card * {
-        color: #111827 !important;
+        color: #1f2937 !important;
     }
 
+    /* Info box */
     [data-testid="stInfo"] {
         background-color: #E8F3FF;
         border-left: 5px solid #0051A8;
         border-radius: 14px;
-        color: #111827;
     }
 
     [data-testid="stInfo"] * {
-        color: #111827 !important;
+        color: #1f2937 !important;
     }
 
-    input, textarea {
-        color: #111827 !important;
+    /* Inputs */
+    .stTextInput input,
+    .stNumberInput input,
+    textarea {
         background-color: white !important;
+        color: #1f2937 !important;
         border-radius: 14px !important;
     }
 
-    label, p, span, div {
-        color: inherit;
+    /* Dropdowns */
+    [data-baseweb="select"] * {
+        color: #1f2937 !important;
     }
+
+    /* Expander */
+    .streamlit-expanderHeader {
+        color: #1f2937 !important;
+        font-weight: 600;
+    }
+
     </style>
     """, unsafe_allow_html=True)
-
 
 def header(title, subtitle=""):
     st.markdown(f"<div class='main-title'>{title}</div>", unsafe_allow_html=True)
