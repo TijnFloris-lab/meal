@@ -1,4 +1,6 @@
+import json
 import streamlit as st
+from google import genai
 
 st.set_page_config(
     page_title="Meal Planner AI",
@@ -67,28 +69,32 @@ RECIPES = [
         "price": 4.80,
         "kcal": 650,
         "protein": 48,
-        "ingredients": ["kipfilet", "rijst", "paprika", "yoghurt"]
+        "ingredients": ["kipfilet", "rijst", "paprika", "yoghurt"],
+        "instructions": "Bak de kipfilet, kook de rijst en serveer met paprika en yoghurtsaus."
     },
     {
         "name": "Snelle tonijn pasta",
         "price": 3.60,
         "kcal": 590,
         "protein": 36,
-        "ingredients": ["pasta", "tonijn", "paprika"]
+        "ingredients": ["pasta", "tonijn", "paprika"],
+        "instructions": "Kook de pasta en meng met tonijn en paprika."
     },
     {
         "name": "Airfryer aardappel bowl",
         "price": 4.20,
         "kcal": 720,
         "protein": 42,
-        "ingredients": ["aardappelen", "mager gehakt", "groentemix"]
+        "ingredients": ["aardappelen", "mager gehakt", "groentemix"],
+        "instructions": "Bereid aardappelen in de airfryer en bak gehakt met groente."
     },
     {
         "name": "Vega yoghurt bowl",
         "price": 2.90,
         "kcal": 520,
         "protein": 31,
-        "ingredients": ["yoghurt", "havermout", "magere kwark"]
+        "ingredients": ["yoghurt", "havermout", "magere kwark"],
+        "instructions": "Meng yoghurt, havermout en kwark tot een snelle bowl."
     }
 ]
 
@@ -104,12 +110,76 @@ def init_state():
         "preferences": [],
         "custom_prompt": "",
         "wishlist": [],
-        "extra_products": []
+        "extra_products": [],
+        "ai_recipes": []
     }
 
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
+
+
+def generate_ai_recipes():
+    catalog = get_catalog_for_supermarket(st.session_state.supermarket)
+
+    if "GEMINI_API_KEY" not in st.secrets:
+        st.error("GEMINI_API_KEY ontbreekt in Streamlit Secrets.")
+        return RECIPES
+
+    client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
+
+    prompt = f"""
+Je bent een Nederlandse maaltijdplanner-app.
+
+Maak 8 maaltijdideeën in geldig JSON-formaat.
+
+Gebruikerskeuzes:
+- Supermarkt: {st.session_state.supermarket}
+- Budget totaal: €{st.session_state.budget}
+- Personen: {st.session_state.persons}
+- Aantal dagen: {st.session_state.days}
+- Keukenapparaten: {st.session_state.appliances}
+- Voorkeuren: {st.session_state.preferences}
+- Extra wens: {st.session_state.custom_prompt}
+
+Gebruik alleen producten uit deze catalogus:
+{catalog}
+
+Belangrijk:
+- Gebruik alleen ingrediënten die letterlijk in de catalogus staan.
+- Houd rekening met budget.
+- Houd rekening met keukenapparaten.
+- Geef prijs per persoon.
+- Geef kcal en eiwit per persoon als schatting.
+- Antwoord alleen met JSON, geen uitleg.
+
+JSON structuur:
+[
+  {{
+    "name": "naam recept",
+    "price": 4.50,
+    "kcal": 650,
+    "protein": 45,
+    "ingredients": ["product 1", "product 2"],
+    "instructions": "korte bereidingswijze"
+  }}
+]
+"""
+
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt
+        )
+
+        text = response.text.strip()
+        text = text.replace("```json", "").replace("```", "").strip()
+
+        return json.loads(text)
+
+    except Exception as e:
+        st.error(f"AI-generatie mislukt: {e}")
+        return RECIPES
 
 
 def go_to(page):
@@ -157,6 +227,8 @@ def home_page():
         with cols[index % 3]:
             if st.button(market, use_container_width=True):
                 st.session_state.supermarket = market
+                st.session_state.ai_recipes = []
+                st.session_state.wishlist = []
                 go_to("settings")
 
 
@@ -253,12 +325,14 @@ def preferences_page():
             go_to("appliances")
 
     with col2:
-        if st.button("Genereer recepten →", use_container_width=True):
+        if st.button("Genereer recepten met AI →", use_container_width=True):
+            with st.spinner("Gemini maakt recepten op basis van jouw keuzes..."):
+                st.session_state.ai_recipes = generate_ai_recipes()
             go_to("recipes")
 
 
 def recipes_page():
-    header("📋 Receptvoorstellen", "Scroll door de recepten en sla favorieten op met het hartje")
+    header("📋 AI Receptvoorstellen", "Scroll door de recepten en sla favorieten op met het hartje")
 
     st.info(
         f"Supermarkt: {st.session_state.supermarket} | "
@@ -268,20 +342,26 @@ def recipes_page():
         f"Apparaten: {', '.join(st.session_state.appliances)}"
     )
 
-    for recipe in RECIPES:
+    recipes_to_show = st.session_state.ai_recipes or RECIPES
+
+    for recipe in recipes_to_show:
         with st.container():
             st.markdown("<div class='recipe-card'>", unsafe_allow_html=True)
 
             col1, col2 = st.columns([4, 1])
 
             with col1:
-                st.subheader(recipe["name"])
-                st.write(f"Prijs per persoon: €{recipe['price']:.2f}")
-                st.write(f"Voeding: {recipe['kcal']} kcal | {recipe['protein']}g eiwit")
-                st.write("Ingrediënten: " + ", ".join(recipe["ingredients"]))
+                st.subheader(recipe.get("name", "Naamloos recept"))
+                st.write(f"Prijs per persoon: €{float(recipe.get('price', 0)):.2f}")
+                st.write(
+                    f"Voeding: {recipe.get('kcal', '?')} kcal | "
+                    f"{recipe.get('protein', '?')}g eiwit"
+                )
+                st.write("Ingrediënten: " + ", ".join(recipe.get("ingredients", [])))
+                st.caption(recipe.get("instructions", ""))
 
             with col2:
-                if st.button("❤️", key=f"heart_{recipe['name']}"):
+                if st.button("❤️", key=f"heart_{recipe.get('name', '')}"):
                     if recipe not in st.session_state.wishlist:
                         st.session_state.wishlist.append(recipe)
                         st.success("Toegevoegd")
@@ -308,9 +388,9 @@ def wishlist_page():
         total = 0
 
         for recipe in st.session_state.wishlist:
-            recipe_total = recipe["price"] * st.session_state.persons
+            recipe_total = float(recipe.get("price", 0)) * st.session_state.persons
             total += recipe_total
-            st.write(f"**{recipe['name']}** — €{recipe_total:.2f}")
+            st.write(f"**{recipe.get('name', 'Naamloos recept')}** — €{recipe_total:.2f}")
 
         st.success(f"Totaal geschat: €{total:.2f}")
 
@@ -331,7 +411,7 @@ def shopping_page():
     shopping_items = []
 
     for recipe in st.session_state.wishlist:
-        shopping_items.extend(recipe["ingredients"])
+        shopping_items.extend(recipe.get("ingredients", []))
 
     shopping_items.extend(st.session_state.extra_products)
 
