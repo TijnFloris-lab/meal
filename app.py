@@ -16,85 +16,81 @@ PREFERENCES = [
     "Luxe", "Zomers", "Winter", "Glutenvrij"
 ]
 
+BASE_PRODUCTS = [
+    {"name": "kipfilet", "price": 6.49, "protein": 46},
+    {"name": "rijst", "price": 1.79, "protein": 7},
+    {"name": "pasta", "price": 1.49, "protein": 12},
+    {"name": "paprika", "price": 0.99, "protein": 1},
+    {"name": "ui", "price": 0.89, "protein": 1},
+    {"name": "knoflook", "price": 0.99, "protein": 1},
+    {"name": "broccoli", "price": 1.49, "protein": 4},
+    {"name": "courgette", "price": 1.29, "protein": 2},
+    {"name": "wraps", "price": 2.19, "protein": 8},
+    {"name": "kaas", "price": 3.49, "protein": 25},
+    {"name": "tomatensaus", "price": 1.29, "protein": 2},
+    {"name": "tonijn", "price": 1.89, "protein": 28},
+    {"name": "mager gehakt", "price": 5.99, "protein": 45},
+    {"name": "aardappelen", "price": 2.49, "protein": 8},
+    {"name": "krieltjes", "price": 2.49, "protein": 4},
+    {"name": "sperziebonen", "price": 1.99, "protein": 3},
+    {"name": "groentemix", "price": 1.99, "protein": 4},
+    {"name": "eieren", "price": 3.29, "protein": 42},
+    {"name": "magere kwark", "price": 1.99, "protein": 50},
+    {"name": "yoghurt", "price": 1.49, "protein": 18},
+    {"name": "melk", "price": 1.19, "protein": 8},
+    {"name": "brood", "price": 1.69, "protein": 20},
+    {"name": "havermout", "price": 0.99, "protein": 13},
+    {"name": "zalm", "price": 5.99, "protein": 35},
+    {"name": "kipdijfilet", "price": 5.49, "protein": 42},
+    {"name": "mais", "price": 1.19, "protein": 3},
+    {"name": "kidneybonen", "price": 1.09, "protein": 8},
+    {"name": "couscous", "price": 1.39, "protein": 12},
+    {"name": "creme fraiche", "price": 1.49, "protein": 3},
+    {"name": "komkommer", "price": 0.99, "protein": 1},
+    {"name": "sla", "price": 1.29, "protein": 1},
+]
+
 CATALOG = {
-    "AH": [
-        {"name": "kipfilet", "price": 6.49, "protein": 46},
-        {"name": "rijst", "price": 1.79, "protein": 7},
-        {"name": "paprika", "price": 0.99, "protein": 1},
-        {"name": "magere kwark", "price": 1.99, "protein": 50},
-        {"name": "eieren", "price": 3.29, "protein": 42},
-        {"name": "melk", "price": 1.19, "protein": 8},
-        {"name": "brood", "price": 1.69, "protein": 20},
-        {"name": "yoghurt", "price": 1.49, "protein": 18},
-    ],
-    "Jumbo": [
-        {"name": "kipfilet", "price": 6.29, "protein": 46},
-        {"name": "pasta", "price": 1.49, "protein": 12},
-        {"name": "tonijn", "price": 1.89, "protein": 28},
-        {"name": "aardappelen", "price": 2.49, "protein": 8},
-        {"name": "mager gehakt", "price": 5.99, "protein": 45},
-        {"name": "melk", "price": 1.15, "protein": 8},
-        {"name": "brood", "price": 1.59, "protein": 20},
-        {"name": "yoghurt", "price": 1.39, "protein": 18},
-    ],
-    "Lidl": [
-        {"name": "kipdijfilet", "price": 5.49, "protein": 42},
-        {"name": "rijst", "price": 1.39, "protein": 7},
-        {"name": "groentemix", "price": 1.99, "protein": 4},
-        {"name": "yoghurt", "price": 1.59, "protein": 30},
-        {"name": "havermout", "price": 0.99, "protein": 13},
-        {"name": "melk", "price": 1.09, "protein": 8},
-        {"name": "brood", "price": 1.39, "protein": 20},
-    ],
+    "AH": BASE_PRODUCTS,
+    "Jumbo": BASE_PRODUCTS,
+    "Deka": BASE_PRODUCTS,
+    "Vomar": BASE_PRODUCTS,
+    "Dirk": BASE_PRODUCTS,
+    "Plus": BASE_PRODUCTS,
+    "Lidl": BASE_PRODUCTS,
+    "ALDI": BASE_PRODUCTS,
+    "Coop": BASE_PRODUCTS,
 }
 
 
 def get_catalog_for_supermarket(supermarket):
-    if supermarket in CATALOG:
-        return CATALOG[supermarket]
-
-    return [
-        {"name": "kipfilet", "price": 6.49, "protein": 46},
-        {"name": "rijst", "price": 1.79, "protein": 7},
-        {"name": "pasta", "price": 1.49, "protein": 12},
-        {"name": "melk", "price": 1.19, "protein": 8},
-        {"name": "brood", "price": 1.69, "protein": 20},
-        {"name": "yoghurt", "price": 1.49, "protein": 18},
-    ]
+    return CATALOG.get(supermarket, BASE_PRODUCTS)
 
 
 RECIPES = [
     {
-        "name": "Proteïne kip bowl",
+        "name": "Kip met rijst en paprika",
         "price": 4.80,
         "kcal": 650,
         "protein": 48,
-        "ingredients": ["kipfilet", "rijst", "paprika", "yoghurt"],
-        "instructions": "Bak de kipfilet, kook de rijst en serveer met paprika en yoghurtsaus."
+        "ingredients": ["kipfilet", "rijst", "paprika"],
+        "instructions": "Bak de kipfilet, kook de rijst en serveer met paprika."
     },
     {
-        "name": "Snelle tonijn pasta",
+        "name": "Pasta tonijn met tomatensaus",
         "price": 3.60,
         "kcal": 590,
         "protein": 36,
-        "ingredients": ["pasta", "tonijn", "paprika"],
-        "instructions": "Kook de pasta en meng met tonijn en paprika."
+        "ingredients": ["pasta", "tonijn", "tomatensaus"],
+        "instructions": "Kook de pasta en meng met tonijn en tomatensaus."
     },
     {
-        "name": "Airfryer aardappel bowl",
+        "name": "Airfryer aardappelen met gehakt",
         "price": 4.20,
         "kcal": 720,
         "protein": 42,
         "ingredients": ["aardappelen", "mager gehakt", "groentemix"],
-        "instructions": "Bereid aardappelen in de airfryer en bak gehakt met groente."
-    },
-    {
-        "name": "Vega yoghurt bowl",
-        "price": 2.90,
-        "kcal": 520,
-        "protein": 31,
-        "ingredients": ["yoghurt", "havermout", "magere kwark"],
-        "instructions": "Meng yoghurt, havermout en kwark tot een snelle bowl."
+        "instructions": "Bereid de aardappelen in de airfryer en bak het gehakt met groente."
     }
 ]
 
@@ -131,7 +127,7 @@ def generate_ai_recipes():
     prompt = f"""
 Je bent een Nederlandse maaltijdplanner-app.
 
-Maak 8 maaltijdideeën in geldig JSON-formaat.
+Maak exact 12 normale Nederlandse maaltijdideeën in geldig JSON-formaat.
 
 Gebruikerskeuzes:
 - Supermarkt: {st.session_state.supermarket}
@@ -152,6 +148,16 @@ Belangrijk:
 - Geef prijs per persoon.
 - Geef kcal en eiwit per persoon als schatting.
 - Antwoord alleen met JSON, geen uitleg.
+- Maak alleen realistische Nederlandse avondmaaltijden.
+- Geen rare combinaties zoals yoghurt met gehakt, kwark met pasta of havermout met tonijn.
+- Elk recept moet minimaal 3 ingrediënten bevatten.
+- Maak recepten die mensen daadwerkelijk zouden koken.
+- Maak exact 12 recepten.
+- Gebruik duidelijke receptnamen zoals:
+  - Kip met rijst en paprika
+  - Pasta tonijn met groente
+  - Airfryer aardappelen met gehakt
+  - Wraps met kip en groenten
 
 JSON structuur:
 [
@@ -160,7 +166,7 @@ JSON structuur:
     "price": 4.50,
     "kcal": 650,
     "protein": 45,
-    "ingredients": ["product 1", "product 2"],
+    "ingredients": ["product 1", "product 2", "product 3"],
     "instructions": "korte bereidingswijze"
   }}
 ]
@@ -175,7 +181,12 @@ JSON structuur:
         text = response.text.strip()
         text = text.replace("```json", "").replace("```", "").strip()
 
-        return json.loads(text)
+        recipes = json.loads(text)
+
+        if not isinstance(recipes, list):
+            return RECIPES
+
+        return recipes
 
     except Exception as e:
         st.error(f"AI-generatie mislukt: {e}")
@@ -271,7 +282,6 @@ def appliances_page():
     header("🍳 Keukenapparaten", "Selecteer wat je wilt gebruiken")
 
     selected = []
-
     cols = st.columns(4)
 
     icons = {
