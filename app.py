@@ -7,7 +7,6 @@ st.set_page_config(
 )
 
 SUPERMARKETS = ["AH", "Jumbo", "Deka", "Vomar", "Dirk", "Plus", "Lidl", "ALDI", "Coop"]
-
 APPLIANCES = ["Airfryer", "Magnetron", "Oven", "Kookplaat"]
 
 PREFERENCES = [
@@ -15,11 +14,52 @@ PREFERENCES = [
     "Luxe", "Zomers", "Winter", "Glutenvrij"
 ]
 
-CATALOG = [
-    "Melk", "Brood", "Yoghurt", "Kipfilet", "Rijst", "Pasta",
-    "Eieren", "Tonijn", "Havermout", "Paprika", "Courgette",
-    "Aardappelen", "Gehakt", "Kwark"
-]
+CATALOG = {
+    "AH": [
+        {"name": "kipfilet", "price": 6.49, "protein": 46},
+        {"name": "rijst", "price": 1.79, "protein": 7},
+        {"name": "paprika", "price": 0.99, "protein": 1},
+        {"name": "magere kwark", "price": 1.99, "protein": 50},
+        {"name": "eieren", "price": 3.29, "protein": 42},
+        {"name": "melk", "price": 1.19, "protein": 8},
+        {"name": "brood", "price": 1.69, "protein": 20},
+        {"name": "yoghurt", "price": 1.49, "protein": 18},
+    ],
+    "Jumbo": [
+        {"name": "kipfilet", "price": 6.29, "protein": 46},
+        {"name": "pasta", "price": 1.49, "protein": 12},
+        {"name": "tonijn", "price": 1.89, "protein": 28},
+        {"name": "aardappelen", "price": 2.49, "protein": 8},
+        {"name": "mager gehakt", "price": 5.99, "protein": 45},
+        {"name": "melk", "price": 1.15, "protein": 8},
+        {"name": "brood", "price": 1.59, "protein": 20},
+        {"name": "yoghurt", "price": 1.39, "protein": 18},
+    ],
+    "Lidl": [
+        {"name": "kipdijfilet", "price": 5.49, "protein": 42},
+        {"name": "rijst", "price": 1.39, "protein": 7},
+        {"name": "groentemix", "price": 1.99, "protein": 4},
+        {"name": "yoghurt", "price": 1.59, "protein": 30},
+        {"name": "havermout", "price": 0.99, "protein": 13},
+        {"name": "melk", "price": 1.09, "protein": 8},
+        {"name": "brood", "price": 1.39, "protein": 20},
+    ],
+}
+
+
+def get_catalog_for_supermarket(supermarket):
+    if supermarket in CATALOG:
+        return CATALOG[supermarket]
+
+    return [
+        {"name": "kipfilet", "price": 6.49, "protein": 46},
+        {"name": "rijst", "price": 1.79, "protein": 7},
+        {"name": "pasta", "price": 1.49, "protein": 12},
+        {"name": "melk", "price": 1.19, "protein": 8},
+        {"name": "brood", "price": 1.69, "protein": 20},
+        {"name": "yoghurt", "price": 1.49, "protein": 18},
+    ]
+
 
 RECIPES = [
     {
@@ -27,28 +67,28 @@ RECIPES = [
         "price": 4.80,
         "kcal": 650,
         "protein": 48,
-        "ingredients": ["Kipfilet", "Rijst", "Paprika", "Yoghurt"]
+        "ingredients": ["kipfilet", "rijst", "paprika", "yoghurt"]
     },
     {
         "name": "Snelle tonijn pasta",
         "price": 3.60,
         "kcal": 590,
         "protein": 36,
-        "ingredients": ["Pasta", "Tonijn", "Paprika"]
+        "ingredients": ["pasta", "tonijn", "paprika"]
     },
     {
         "name": "Airfryer aardappel bowl",
         "price": 4.20,
         "kcal": 720,
         "protein": 42,
-        "ingredients": ["Aardappelen", "Gehakt", "Courgette"]
+        "ingredients": ["aardappelen", "mager gehakt", "groentemix"]
     },
     {
         "name": "Vega yoghurt bowl",
         "price": 2.90,
         "kcal": 520,
         "protein": 31,
-        "ingredients": ["Yoghurt", "Havermout", "Kwark"]
+        "ingredients": ["yoghurt", "havermout", "magere kwark"]
     }
 ]
 
@@ -97,10 +137,6 @@ def card_css():
         background: #ffffff;
         box-shadow: 0 4px 14px rgba(0,0,0,0.06);
         margin-bottom: 18px;
-    }
-    .small-muted {
-        color: #777;
-        font-size: 14px;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -228,7 +264,8 @@ def recipes_page():
         f"Supermarkt: {st.session_state.supermarket} | "
         f"Budget: €{st.session_state.budget:.2f} | "
         f"{st.session_state.persons} personen | "
-        f"{st.session_state.days} dagen"
+        f"{st.session_state.days} dagen | "
+        f"Apparaten: {', '.join(st.session_state.appliances)}"
     )
 
     for recipe in RECIPES:
@@ -273,7 +310,6 @@ def wishlist_page():
         for recipe in st.session_state.wishlist:
             recipe_total = recipe["price"] * st.session_state.persons
             total += recipe_total
-
             st.write(f"**{recipe['name']}** — €{recipe_total:.2f}")
 
         st.success(f"Totaal geschat: €{total:.2f}")
@@ -315,14 +351,21 @@ def shopping_page():
 
     search = st.text_input("Zoek product", placeholder="Bijvoorbeeld melk, brood, yoghurt...")
 
+    catalog = get_catalog_for_supermarket(st.session_state.supermarket)
+
     if search:
-        results = [p for p in CATALOG if search.lower() in p.lower()]
+        results = [
+            product for product in catalog
+            if search.lower() in product["name"].lower()
+        ]
 
         if results:
             for product in results:
-                if st.button(f"+ Voeg {product} toe", key=f"add_{product}"):
-                    if product not in st.session_state.extra_products:
-                        st.session_state.extra_products.append(product)
+                button_text = f"+ Voeg {product['name']} toe (€{product['price']:.2f})"
+
+                if st.button(button_text, key=f"add_{product['name']}"):
+                    if product["name"] not in st.session_state.extra_products:
+                        st.session_state.extra_products.append(product["name"])
                         st.rerun()
         else:
             st.write("Geen producten gevonden.")
