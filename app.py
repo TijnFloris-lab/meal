@@ -17,37 +17,51 @@ PREFERENCES = [
 ]
 
 BASE_PRODUCTS = [
-    {"name": "kipfilet", "price": 6.49, "protein": 46},
-    {"name": "rijst", "price": 1.79, "protein": 7},
-    {"name": "pasta", "price": 1.49, "protein": 12},
-    {"name": "paprika", "price": 0.99, "protein": 1},
-    {"name": "ui", "price": 0.89, "protein": 1},
-    {"name": "knoflook", "price": 0.99, "protein": 1},
-    {"name": "broccoli", "price": 1.49, "protein": 4},
-    {"name": "courgette", "price": 1.29, "protein": 2},
-    {"name": "wraps", "price": 2.19, "protein": 8},
-    {"name": "kaas", "price": 3.49, "protein": 25},
-    {"name": "tomatensaus", "price": 1.29, "protein": 2},
-    {"name": "tonijn", "price": 1.89, "protein": 28},
-    {"name": "mager gehakt", "price": 5.99, "protein": 45},
-    {"name": "aardappelen", "price": 2.49, "protein": 8},
-    {"name": "krieltjes", "price": 2.49, "protein": 4},
-    {"name": "sperziebonen", "price": 1.99, "protein": 3},
-    {"name": "groentemix", "price": 1.99, "protein": 4},
-    {"name": "eieren", "price": 3.29, "protein": 42},
-    {"name": "magere kwark", "price": 1.99, "protein": 50},
-    {"name": "yoghurt", "price": 1.49, "protein": 18},
-    {"name": "melk", "price": 1.19, "protein": 8},
-    {"name": "brood", "price": 1.69, "protein": 20},
-    {"name": "havermout", "price": 0.99, "protein": 13},
-    {"name": "zalm", "price": 5.99, "protein": 35},
-    {"name": "kipdijfilet", "price": 5.49, "protein": 42},
-    {"name": "mais", "price": 1.19, "protein": 3},
-    {"name": "kidneybonen", "price": 1.09, "protein": 8},
-    {"name": "couscous", "price": 1.39, "protein": 12},
-    {"name": "creme fraiche", "price": 1.49, "protein": 3},
-    {"name": "komkommer", "price": 0.99, "protein": 1},
-    {"name": "sla", "price": 1.29, "protein": 1},
+    {"name": "kipfilet 500g", "price": 6.49, "protein": 46, "category": "vlees"},
+    {"name": "kipdijfilet 500g", "price": 5.49, "protein": 42, "category": "vlees"},
+    {"name": "mager gehakt 500g", "price": 5.99, "protein": 45, "category": "vlees"},
+    {"name": "zalmfilet 2 stuks", "price": 5.99, "protein": 35, "category": "vis"},
+    {"name": "tonijn blik", "price": 1.89, "protein": 28, "category": "vis"},
+
+    {"name": "rijst 1kg", "price": 1.79, "protein": 7, "category": "granen"},
+    {"name": "pasta 500g", "price": 1.49, "protein": 12, "category": "granen"},
+    {"name": "couscous 500g", "price": 1.39, "protein": 12, "category": "granen"},
+    {"name": "wraps 6 stuks", "price": 2.19, "protein": 8, "category": "brood"},
+    {"name": "volkoren brood", "price": 1.69, "protein": 20, "category": "brood"},
+
+    {"name": "aardappelen 1kg", "price": 2.49, "protein": 8, "category": "aardappelen"},
+    {"name": "krieltjes 700g", "price": 2.49, "protein": 4, "category": "aardappelen"},
+
+    {"name": "paprika mix", "price": 2.49, "protein": 3, "category": "groente"},
+    {"name": "ui 1kg", "price": 0.89, "protein": 1, "category": "groente"},
+    {"name": "knoflook", "price": 0.99, "protein": 1, "category": "groente"},
+    {"name": "broccoli", "price": 1.49, "protein": 4, "category": "groente"},
+    {"name": "courgette", "price": 1.29, "protein": 2, "category": "groente"},
+    {"name": "sperziebonen 400g", "price": 1.99, "protein": 3, "category": "groente"},
+    {"name": "groentemix 400g", "price": 1.99, "protein": 4, "category": "groente"},
+    {"name": "komkommer", "price": 0.99, "protein": 1, "category": "groente"},
+    {"name": "ijsbergsla", "price": 1.29, "protein": 1, "category": "groente"},
+    {"name": "mais blik", "price": 1.19, "protein": 3, "category": "groente"},
+    {"name": "kidneybonen blik", "price": 1.09, "protein": 8, "category": "peulvruchten"},
+
+    {"name": "eieren 10 stuks", "price": 3.29, "protein": 42, "category": "zuivel"},
+    {"name": "magere kwark naturel 500g", "price": 1.99, "protein": 50, "category": "zuivel"},
+    {"name": "volle kwark 500g", "price": 2.19, "protein": 40, "category": "zuivel"},
+    {"name": "Griekse yoghurt 500g", "price": 2.29, "protein": 35, "category": "zuivel"},
+    {"name": "magere yoghurt naturel 1L", "price": 1.49, "protein": 18, "category": "zuivel"},
+    {"name": "vanille yoghurt 1L", "price": 1.89, "protein": 16, "category": "zuivel"},
+    {"name": "Skyr naturel 450g", "price": 2.49, "protein": 45, "category": "zuivel"},
+    {"name": "halfvolle melk 1L", "price": 1.19, "protein": 8, "category": "zuivel"},
+    {"name": "geraspte kaas 200g", "price": 3.49, "protein": 25, "category": "zuivel"},
+    {"name": "creme fraiche", "price": 1.49, "protein": 3, "category": "zuivel"},
+
+    {"name": "tomatensaus", "price": 1.29, "protein": 2, "category": "saus"},
+    {"name": "sojasaus", "price": 1.99, "protein": 3, "category": "saus"},
+    {"name": "sambal", "price": 1.39, "protein": 1, "category": "saus"},
+
+    {"name": "havermout 500g", "price": 0.99, "protein": 13, "category": "ontbijt"},
+    {"name": "bananen 1kg", "price": 1.89, "protein": 4, "category": "fruit"},
+    {"name": "appels 1kg", "price": 2.49, "protein": 2, "category": "fruit"},
 ]
 
 CATALOG = {
@@ -67,13 +81,47 @@ def get_catalog_for_supermarket(supermarket):
     return CATALOG.get(supermarket, BASE_PRODUCTS)
 
 
+def search_catalog(supermarket, query):
+    catalog = get_catalog_for_supermarket(supermarket)
+    query = query.lower().strip()
+
+    return [
+        product for product in catalog
+        if query in product["name"].lower()
+        or query in product["category"].lower()
+    ]
+
+
+def get_relevant_products(supermarket, preferences):
+    catalog = get_catalog_for_supermarket(supermarket)
+
+    preference_text = " ".join(preferences).lower()
+
+    if "proteïne" in preference_text or "eiwit" in preference_text:
+        return sorted(catalog, key=lambda x: x["protein"], reverse=True)[:35]
+
+    if "vega" in preference_text or "vegan" in preference_text:
+        excluded = ["vlees", "vis"]
+        return [p for p in catalog if p["category"] not in excluded][:35]
+
+    if "gezond" in preference_text:
+        healthy_categories = ["vlees", "vis", "groente", "peulvruchten", "zuivel", "granen"]
+        return [p for p in catalog if p["category"] in healthy_categories][:35]
+
+    if "snel" in preference_text:
+        fast_categories = ["granen", "groente", "vis", "zuivel", "brood"]
+        return [p for p in catalog if p["category"] in fast_categories][:35]
+
+    return catalog[:35]
+
+
 RECIPES = [
     {
         "name": "Kip met rijst en paprika",
         "price": 4.80,
         "kcal": 650,
         "protein": 48,
-        "ingredients": ["kipfilet", "rijst", "paprika"],
+        "ingredients": ["kipfilet 500g", "rijst 1kg", "paprika mix"],
         "instructions": "Bak de kipfilet, kook de rijst en serveer met paprika."
     },
     {
@@ -81,7 +129,7 @@ RECIPES = [
         "price": 3.60,
         "kcal": 590,
         "protein": 36,
-        "ingredients": ["pasta", "tonijn", "tomatensaus"],
+        "ingredients": ["pasta 500g", "tonijn blik", "tomatensaus"],
         "instructions": "Kook de pasta en meng met tonijn en tomatensaus."
     },
     {
@@ -89,7 +137,7 @@ RECIPES = [
         "price": 4.20,
         "kcal": 720,
         "protein": 42,
-        "ingredients": ["aardappelen", "mager gehakt", "groentemix"],
+        "ingredients": ["aardappelen 1kg", "mager gehakt 500g", "groentemix 400g"],
         "instructions": "Bereid de aardappelen in de airfryer en bak het gehakt met groente."
     }
 ]
@@ -116,7 +164,9 @@ def init_state():
 
 
 def generate_ai_recipes():
-    catalog = get_catalog_for_supermarket(st.session_state.supermarket)
+    supermarket = st.session_state.supermarket
+    full_catalog = get_catalog_for_supermarket(supermarket)
+    relevant_products = get_relevant_products(supermarket, st.session_state.preferences)
 
     if "GEMINI_API_KEY" not in st.secrets:
         st.error("GEMINI_API_KEY ontbreekt in Streamlit Secrets.")
@@ -125,12 +175,19 @@ def generate_ai_recipes():
     client = genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
     prompt = f"""
-Je bent een Nederlandse maaltijdplanner-app.
+Je bent een Nederlandse AI meal planner.
 
-Maak exact 12 normale Nederlandse maaltijdideeën in geldig JSON-formaat.
+Je taak:
+1. Analyseer de supermarktproducten.
+2. Kies logische productcombinaties.
+3. Maak exact 12 normale Nederlandse maaltijdideeën.
+4. Gebruik alleen producten uit de productlijst.
+5. Houd rekening met budget, personen, dagen, apparaten en voorkeuren.
+
+Gekozen supermarkt:
+{supermarket}
 
 Gebruikerskeuzes:
-- Supermarkt: {st.session_state.supermarket}
 - Budget totaal: €{st.session_state.budget}
 - Personen: {st.session_state.persons}
 - Aantal dagen: {st.session_state.days}
@@ -138,26 +195,23 @@ Gebruikerskeuzes:
 - Voorkeuren: {st.session_state.preferences}
 - Extra wens: {st.session_state.custom_prompt}
 
-Gebruik alleen producten uit deze catalogus:
-{catalog}
+Relevante producten voor deze gebruiker:
+{relevant_products}
+
+Volledige beschikbare catalogus:
+{full_catalog}
 
 Belangrijk:
-- Gebruik alleen ingrediënten die letterlijk in de catalogus staan.
-- Houd rekening met budget.
-- Houd rekening met keukenapparaten.
-- Geef prijs per persoon.
-- Geef kcal en eiwit per persoon als schatting.
-- Antwoord alleen met JSON, geen uitleg.
-- Maak alleen realistische Nederlandse avondmaaltijden.
+- Gebruik alleen ingrediënten die letterlijk als "name" in de catalogus staan.
+- Zoek binnen de catalogus naar logische combinaties.
+- Geen verzonnen supermarktproducten.
 - Geen rare combinaties zoals yoghurt met gehakt, kwark met pasta of havermout met tonijn.
 - Elk recept moet minimaal 3 ingrediënten bevatten.
-- Maak recepten die mensen daadwerkelijk zouden koken.
+- Elk recept moet praktisch zijn voor een Nederlandse gebruiker.
+- Geef prijs per persoon.
+- Geef kcal en eiwit per persoon als schatting.
 - Maak exact 12 recepten.
-- Gebruik duidelijke receptnamen zoals:
-  - Kip met rijst en paprika
-  - Pasta tonijn met groente
-  - Airfryer aardappelen met gehakt
-  - Wraps met kip en groenten
+- Antwoord alleen met JSON, geen uitleg.
 
 JSON structuur:
 [
@@ -166,7 +220,7 @@ JSON structuur:
     "price": 4.50,
     "kcal": 650,
     "protein": 45,
-    "ingredients": ["product 1", "product 2", "product 3"],
+    "ingredients": ["exacte productnaam 1", "exacte productnaam 2", "exacte productnaam 3"],
     "instructions": "korte bereidingswijze"
   }}
 ]
@@ -219,6 +273,13 @@ def card_css():
         box-shadow: 0 4px 14px rgba(0,0,0,0.06);
         margin-bottom: 18px;
     }
+    .product-card {
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid #e5e5e5;
+        background: #fafafa;
+        margin-bottom: 10px;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -240,6 +301,7 @@ def home_page():
                 st.session_state.supermarket = market
                 st.session_state.ai_recipes = []
                 st.session_state.wishlist = []
+                st.session_state.extra_products = []
                 go_to("settings")
 
 
@@ -328,6 +390,18 @@ def preferences_page():
         placeholder="Bijvoorbeeld: goedkoop, weinig afwas, veel kip, geen vis..."
     )
 
+    relevant_products = get_relevant_products(
+        st.session_state.supermarket,
+        st.session_state.preferences
+    )
+
+    with st.expander("Bekijk producten die AI waarschijnlijk gebruikt"):
+        for product in relevant_products:
+            st.write(
+                f"- {product['name']} | €{product['price']:.2f} | "
+                f"{product['protein']}g eiwit | {product['category']}"
+            )
+
     col1, col2 = st.columns(2)
 
     with col1:
@@ -336,7 +410,7 @@ def preferences_page():
 
     with col2:
         if st.button("Genereer recepten met AI →", use_container_width=True):
-            with st.spinner("Gemini maakt recepten op basis van jouw keuzes..."):
+            with st.spinner("Gemini zoekt producten en maakt recepten..."):
                 st.session_state.ai_recipes = generate_ai_recipes()
             go_to("recipes")
 
@@ -439,24 +513,37 @@ def shopping_page():
 
     st.subheader(f"Zoek in catalogus van {st.session_state.supermarket}")
 
-    search = st.text_input("Zoek product", placeholder="Bijvoorbeeld melk, brood, yoghurt...")
-
-    catalog = get_catalog_for_supermarket(st.session_state.supermarket)
+    search = st.text_input(
+        "Zoek product",
+        placeholder="Bijvoorbeeld yoghurt, melk, brood, kip..."
+    )
 
     if search:
-        results = [
-            product for product in catalog
-            if search.lower() in product["name"].lower()
-        ]
+        results = search_catalog(st.session_state.supermarket, search)
 
         if results:
-            for product in results:
-                button_text = f"+ Voeg {product['name']} toe (€{product['price']:.2f})"
+            st.write(f"{len(results)} producten gevonden:")
 
-                if st.button(button_text, key=f"add_{product['name']}"):
-                    if product["name"] not in st.session_state.extra_products:
-                        st.session_state.extra_products.append(product["name"])
-                        st.rerun()
+            for product in results:
+                st.markdown("<div class='product-card'>", unsafe_allow_html=True)
+
+                col1, col2 = st.columns([4, 1])
+
+                with col1:
+                    st.write(f"**{product['name']}**")
+                    st.caption(
+                        f"Prijs: €{product['price']:.2f} | "
+                        f"Eiwit: {product['protein']}g | "
+                        f"Categorie: {product['category']}"
+                    )
+
+                with col2:
+                    if st.button("Toevoegen", key=f"add_{product['name']}"):
+                        if product["name"] not in st.session_state.extra_products:
+                            st.session_state.extra_products.append(product["name"])
+                            st.rerun()
+
+                st.markdown("</div>", unsafe_allow_html=True)
         else:
             st.write("Geen producten gevonden.")
 
