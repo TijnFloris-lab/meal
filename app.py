@@ -255,6 +255,79 @@ def go_to(page):
 def card_css():
     st.markdown("""
     <style>
+    .stApp {
+        background: #f3f7fb;
+        color: #1f2937;
+    }
+
+    .main-title {
+        font-size: 52px;
+        font-weight: 900;
+        color: #0051a8;
+        margin-bottom: 4px;
+        letter-spacing: -1px;
+    }
+
+    .sub-title {
+        font-size: 20px;
+        color: #4b5563;
+        margin-bottom: 32px;
+    }
+
+    div.stButton > button {
+        border-radius: 999px;
+        height: 62px;
+        font-size: 18px;
+        font-weight: 800;
+        border: none;
+        background: #0051a8;
+        color: white;
+        box-shadow: 0 6px 16px rgba(0,81,168,0.22);
+        transition: 0.2s ease;
+    }
+
+    div.stButton > button:hover {
+        background: #003f86;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 22px rgba(0,81,168,0.28);
+    }
+
+    .recipe-card {
+        padding: 26px;
+        border-radius: 22px;
+        border: 1px solid #dbeafe;
+        background: #ffffff;
+        box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+        margin-bottom: 22px;
+    }
+
+    .product-card {
+        padding: 18px;
+        border-radius: 18px;
+        border: 1px solid #dbeafe;
+        background: #ffffff;
+        box-shadow: 0 4px 14px rgba(15,23,42,0.06);
+        margin-bottom: 12px;
+    }
+
+    [data-testid="stInfo"] {
+        background-color: #e6f2ff;
+        border-left: 6px solid #0051a8;
+        border-radius: 14px;
+    }
+
+    input, textarea {
+        border-radius: 14px !important;
+    }
+
+    section[data-testid="stSidebar"] {
+        background: #ffffff;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    st.markdown("""
+    <style>
     .main-title {
         font-size: 48px;
         font-weight: 800;
