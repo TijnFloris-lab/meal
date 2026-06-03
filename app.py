@@ -255,9 +255,9 @@ def go_to(page):
 def card_css():
     st.markdown("""
     <style>
-
     .stApp {
         background-color: #f5f8fb;
+        color: #111827;
     }
 
     .main-title {
@@ -269,63 +269,79 @@ def card_css():
 
     .sub-title {
         font-size: 20px;
-        color: #666666;
+        color: #374151;
         margin-bottom: 30px;
     }
 
     div.stButton > button {
-        width: 100%;
         border-radius: 999px;
         background-color: #0051A8;
-        color: white;
+        color: white !important;
         border: none;
         font-weight: 700;
         min-height: 56px;
-        transition: all .2s ease;
+    }
+
+    div.stButton > button p {
+        color: white !important;
     }
 
     div.stButton > button:hover {
         background-color: #003F82;
-        color: white;
-        transform: translateY(-2px);
+        color: white !important;
+    }
+
+    div.stButton > button:hover p {
+        color: white !important;
+    }
+
+    .recipe-card, .product-card {
+        color: #111827;
+        background: white;
+        border: 1px solid #DDE7F2;
+        box-shadow: 0 4px 18px rgba(0,0,0,.06);
     }
 
     .recipe-card {
         padding: 24px;
         border-radius: 20px;
-        background: white;
-        border: 1px solid #DDE7F2;
-        box-shadow: 0 4px 18px rgba(0,0,0,.06);
         margin-bottom: 18px;
     }
 
     .product-card {
         padding: 18px;
         border-radius: 16px;
-        background: white;
-        border: 1px solid #DDE7F2;
-        box-shadow: 0 2px 10px rgba(0,0,0,.05);
         margin-bottom: 12px;
+    }
+
+    .recipe-card * {
+        color: #111827 !important;
+    }
+
+    .product-card * {
+        color: #111827 !important;
     }
 
     [data-testid="stInfo"] {
         background-color: #E8F3FF;
         border-left: 5px solid #0051A8;
         border-radius: 14px;
+        color: #111827;
     }
 
-    .stTextInput input {
-        border-radius: 14px;
+    [data-testid="stInfo"] * {
+        color: #111827 !important;
     }
 
-    .stNumberInput input {
-        border-radius: 14px;
+    input, textarea {
+        color: #111827 !important;
+        background-color: white !important;
+        border-radius: 14px !important;
     }
 
-    .stMultiSelect {
-        border-radius: 14px;
+    label, p, span, div {
+        color: inherit;
     }
-
     </style>
     """, unsafe_allow_html=True)
 
